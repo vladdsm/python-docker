@@ -1,0 +1,61 @@
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+*.egg-info/
+*.eggs/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.sublime-workspace
+*.sublime-project
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Environment variables
+.env
+scripts/.env
+
+# Docker artifacts
+*.pid
+*.db
+*.sqlite3
+*.tar
+*.gz
+*.tgz
+*.lock
+docker-compose.override.yml
+
+# Test output
+htmlcov/
+coverage.xml
+*.cover
+*.py,cover
+.cache/
+nosetests.xml
+test-results/
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# Python packaging
+*.whl
+MANIFEST
