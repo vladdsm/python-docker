@@ -36,6 +36,9 @@ PY_PORT=8888
 ### 3. Build the Docker image
 
 ```powershell
+
+cd python-docker
+
 .\scripts\build.ps1
 ```
 
