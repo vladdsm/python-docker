@@ -1,6 +1,23 @@
+# Notebook runtime
+jupyterlab>=4.1.0
+notebook>=7.1.0
+ipykernel>=6.29.0
+
+# Core data handling
 numpy
 pandas
-matplotlib
-scikit-learn
-jupyterlab
-notebook
+tqdm
+
+# PDF ingestion
+pypdf==4.3.1
+
+# Vector store client
+qdrant-client==1.9.2
+grpcio>=1.60.0
+
+# LLM / embeddings
+openai==1.40.0
+tiktoken==0.7.0
+
+# Configuration
+python-dotenv==1.0.1

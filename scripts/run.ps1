@@ -37,12 +37,15 @@ docker run `
   --name python-lab `
   -d `
   -p ${Port}:8888 `
+  -p 8501:8501 `
   -e JUPYTER_PASSWORD=$($envVars["JUPYTER_PASSWORD"]) `
   -v "${workspaceHost}:/home/jovyan/workspace" `
   -v "${githubHost}:/home/jovyan/github" `
   --restart unless-stopped `
   $Tag `
   jupyter lab --NotebookApp.password='' --NotebookApp.token=''
+
+docker network connect ppwr-net python-lab
 
 # Open browser to JupyterLab
 $url = "http://localhost:$Port"
