@@ -29,6 +29,23 @@ if (-Not (Test-Path $workspaceHost)) {
 }
 $githubHost = Join-Path $env:USERPROFILE "Documents\GitHub"
 
+# Resolve host paths for your repos
+$ppwrHost = "C:\Users\vladi\Documents\GitHub\ppwr-vector-store"
+$agenticHost = "C:\Users\vladi\Documents\GitHub\agentic"
+
+if (-Not (Test-Path $ppwrHost)) {
+    Write-Error "Main repo path not found: $ppwrHost"
+    exit 1
+}
+
+if (-Not (Test-Path $agenticHost)) {
+    Write-Error "Agentic repo path not found: $agenticHost"
+    exit 1
+}
+
+
+
+
 # Stop and remove any existing container
 docker stop python-lab 2>$null | Out-Null
 docker rm python-lab 2>$null | Out-Null
@@ -41,6 +58,8 @@ docker run `
   -e JUPYTER_PASSWORD=$($envVars["JUPYTER_PASSWORD"]) `
   -v "${workspaceHost}:/home/jovyan/workspace" `
   -v "${githubHost}:/home/jovyan/github" `
+  -v "${ppwrHost}:/home/jovyan/ppwr-vector-store" `
+  -v "${agenticHost}:/home/jovyan/agentic" `
   --restart unless-stopped `
   $Tag `
   jupyter lab --NotebookApp.password='' --NotebookApp.token=''
@@ -51,3 +70,14 @@ docker network connect ppwr-net python-lab
 $url = "http://localhost:$Port"
 Start-Sleep -Seconds 8
 Start-Process $url
+
+
+
+
+
+
+
+
+
+
+
