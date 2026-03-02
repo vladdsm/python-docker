@@ -22,12 +22,19 @@ Get-Content $envPath | Where-Object { $_ -match "=" -and $_ -notmatch "^\s*#" } 
     $envVars[$parts[0].Trim()] = $parts[1].Trim()
 }
 
-# Resolve workspace and GitHub paths
-$workspaceHost = Join-Path $repoRoot $envVars["WORKSPACE"]
-if (-Not (Test-Path $workspaceHost)) {
-    New-Item -ItemType Directory -Path $workspaceHost | Out-Null
+# Resolve host paths for your repos
+$ppwrHost = "C:\Users\vladi\Documents\GitHub\ppwr-vector-store"
+$agenticHost = "C:\Users\vladi\Documents\GitHub\agentic"
+
+if (-Not (Test-Path $ppwrHost)) {
+    Write-Error "Main repo path not found: $ppwrHost"
+    exit 1
 }
-$githubHost = Join-Path $env:USERPROFILE "Documents\GitHub"
+
+if (-Not (Test-Path $agenticHost)) {
+    Write-Error "Agentic repo path not found: $agenticHost"
+    exit 1
+}
 
 # Stop and remove any existing container
 docker stop python-lab 2>$null | Out-Null
@@ -39,8 +46,8 @@ docker run `
   -p ${Port}:8888 `
   -p 8501:8501 `
   -e JUPYTER_PASSWORD=$($envVars["JUPYTER_PASSWORD"]) `
-  -v "${workspaceHost}:/home/jovyan/workspace" `
-  -v "${githubHost}:/home/jovyan/github" `
+  -v "${ppwrHost}:/home/jovyan/ppwr-vector-store" `
+  -v "${agenticHost}:/home/jovyan/agentic" `
   --restart unless-stopped `
   $Tag `
   jupyter lab --NotebookApp.password='' --NotebookApp.token=''
